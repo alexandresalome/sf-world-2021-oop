@@ -1,0 +1,12 @@
+{
+    "name": "alexandresalome/sf-world-2021-oop",
+    "autoload": {
+        "psr-4": {
+            "Oop\\": "src/"
+        }
+    },
+    "require-dev": {
+        "symfony/error-handler": "^6.0",
+        "symfony/var-dumper": "^6.0"
+    }
+}
