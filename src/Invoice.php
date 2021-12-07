@@ -4,16 +4,16 @@ namespace Oop;
 
 class Invoice
 {
-    private string $id;
+    private int $id;
     private InvoiceLineCollection $lines;
 
-    public function __construct(string $id, InvoiceLineCollection $lines)
+    public function __construct(int $id, InvoiceLineCollection $lines)
     {
         $this->id = $id;
         $this->lines = $lines;
     }
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
