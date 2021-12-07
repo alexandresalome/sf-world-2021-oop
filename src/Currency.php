@@ -25,7 +25,7 @@ class Currency
         return $this->code === $other->code;
     }
 
-    public function toString(): string
+    public function __toString(): string
     {
         return $this->code;
     }

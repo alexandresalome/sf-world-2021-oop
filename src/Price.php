@@ -19,8 +19,8 @@ class Price
         if (!$price->currency->equals($this->currency)) {
             throw new \LogicException(sprintf(
                 'Cannot add "%s" and "%s".',
-                $price->currency->toString(),
-                $this->currency->toString()
+                $price->currency,
+                $this->currency
             ));
         }
 
@@ -43,12 +43,12 @@ class Price
         return new Price($cents, Currency::euro());
     }
 
-    public function toString(): string
+    public function __toString(): string
     {
         return sprintf(
             '%.2f %s',
             $this->cents / 100,
-            $this->currency->toString(),
+            $this->currency,
         );
     }
 }

@@ -15,11 +15,11 @@ class InvoiceCliRenderer implements InvoiceRendererInterface
 
         foreach ($invoice->getLines() as [$qty, $desc, $price]) {
             /** @var Price $price */
-            echo sprintf("%-20s %-8s %-8s\n", $desc, $qty, $price->toString());
+            echo sprintf("%-20s %-8s %-8s\n", $desc, $qty, $price);
             $total = $total->add($price->multiply($qty));
         }
 
         echo "\n";
-        echo sprintf("TOTAL: %s\n", $total->toString());
+        echo sprintf("TOTAL: %s\n", $total);
     }
 }
