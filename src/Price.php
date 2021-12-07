@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oop;
 
 // Value Object
@@ -33,7 +35,7 @@ class Price
     public function multiply(float $ratio): Price
     {
         return new Price(
-            $ratio * $this->cents,
+            (int) $ratio * $this->cents,
             $this->currency
         );
     }

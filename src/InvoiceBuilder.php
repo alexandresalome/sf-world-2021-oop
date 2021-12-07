@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oop;
 
 class InvoiceBuilder
 {
-    private string $id;
+    private int $id;
 
     private InvoiceLineCollectionBuilder $lines;
 
@@ -13,7 +15,7 @@ class InvoiceBuilder
         $this->lines = new InvoiceLineCollectionBuilder();
     }
 
-    public function setId(string $id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
 

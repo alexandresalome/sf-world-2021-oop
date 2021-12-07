@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Main;
 
 use Money\Money;
