@@ -22,10 +22,10 @@ $invoice = (new InvoiceBuilder())
     ->setId(123)
     ->addLine(300, 'Apples', new MoneyAdapter(Money::EUR(39)))
     ->removeLine('Apples')
-    ->addLine(1, 'Bananas', new MoneyAdapter(Money::EUR(60))
+    ->addLine(1, 'Bananas', new MoneyAdapter(Money::EUR(60)))
     ->increment('Bananas', 1)
-    ->addLine(1, 'Bag', new MoneyAdapter(Money::EUR(100))
-    ->addLine(300, 'Apples', new MoneyAdapter(Money::EUR(39))
+    ->addLine(1, 'Bag', new MoneyAdapter(Money::EUR(100)))
+    ->addLine(300, 'Apples', new MoneyAdapter(Money::EUR(39)))
     ->getInvoice()
 ;
 
