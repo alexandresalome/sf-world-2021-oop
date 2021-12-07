@@ -25,7 +25,7 @@ class InvoiceManager
         // Either be filled by the user or fetched from a service
         $id = 123;
         $lines = [
-            [-300, 'Apples', Price::euro(39)],
+            [300, 'Apples', Price::euro(39)],
             [2, 'Bananas', Price::euro(60)],
             [1, 'Bag', Price::euro(100)],
         ];

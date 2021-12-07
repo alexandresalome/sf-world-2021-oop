@@ -51,4 +51,9 @@ class Price
             $this->currency->toString(),
         );
     }
+
+    public function isPositive(): bool
+    {
+        return $this->cents > 0;
+    }
 }

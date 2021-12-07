@@ -8,8 +8,8 @@ class InvoiceCliRenderer implements InvoiceRendererInterface
     {
         echo sprintf("## INVOICE #%s\n\n", $invoice->getId());
 
-        echo sprintf("%-20s %-8s %-8s\n", 'Description', 'Qty', 'Total');
-        echo sprintf("%-20s %-8s %-8s\n", '-----------', '---', '-----');
+        echo sprintf("%-20s %-8s %-8s\n", 'Description', 'Qty', 'Unit price');
+        echo sprintf("%-20s %-8s %-8s\n", '-----------', '---', '----------');
 
         foreach ($invoice->getLines() as $line) {
             echo sprintf(
