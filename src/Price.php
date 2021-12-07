@@ -56,4 +56,17 @@ class Price
     {
         return $this->cents > 0;
     }
+
+    public function isGreaterThan(Price $price): bool
+    {
+        if (!$price->currency->equals($this->currency)) {
+            throw new \RuntimeException(sprintf(
+                'Can\'t compare two prices in two different currencies ("%s" and "%s").',
+                $price->currency->toString(),
+                $this->currency->toString(),
+            ));
+        }
+
+        return $this->cents > $price->cents;
+    }
 }
