@@ -8,17 +8,18 @@ class InvoiceCliRenderer implements InvoiceRendererInterface
     {
         echo sprintf("## INVOICE #%s\n\n", $invoice->getId());
 
-        $total = 0;
+        $total = Price::euro(0);
 
         echo sprintf("%-20s %-8s %-8s\n", 'Description', 'Qty', 'Total');
         echo sprintf("%-20s %-8s %-8s\n", '-----------', '---', '-----');
 
         foreach ($invoice->getLines() as [$qty, $desc, $price]) {
-            echo sprintf("%-20s %-8s %-8s\n", $desc, $qty, $price);
-            $total += $qty * $price;
+            /** @var Price $price */
+            echo sprintf("%-20s %-8s %-8s\n", $desc, $qty, $price->toString());
+            $total = $total->add($price->multiply($qty));
         }
 
         echo "\n";
-        echo sprintf("TOTAL: %s\n", $total);
+        echo sprintf("TOTAL: %s\n", $total->toString());
     }
 }
