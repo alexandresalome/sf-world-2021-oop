@@ -21,6 +21,8 @@ class InvoiceCliRenderer implements InvoiceRendererInterface
         }
 
         echo "\n";
+        echo sprintf("Delivery fees: %s\n", $invoice->getDeliveryFees()->toString());
+        echo "\n";
         echo sprintf("TOTAL: %s\n", $invoice->getTotal()->toString());
     }
 }

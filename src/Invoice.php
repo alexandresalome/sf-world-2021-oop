@@ -28,6 +28,11 @@ class Invoice
 
     public function getTotal(): Price
     {
-        return $this->lines->getTotal();
+        return $this->lines->getTotal()->add($this->getDeliveryFees());
+    }
+
+    public function getDeliveryFees(): Price
+    {
+        return Price::euro(700);
     }
 }

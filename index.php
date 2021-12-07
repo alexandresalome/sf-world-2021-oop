@@ -2,7 +2,6 @@
 
 namespace Main;
 
-use Oop\Currency;
 use Oop\Invoice;
 use Oop\InvoiceCliRenderer;
 use Oop\InvoiceHtmlRenderer;
