@@ -6,7 +6,7 @@
         }
     },
     "require-dev": {
-        "symfony/error-handler": "^6.0",
-        "symfony/var-dumper": "^6.0"
+        "symfony/error-handler": "^5.0|^6.0",
+        "symfony/var-dumper": "^5.0|^6.0"
     }
 }
