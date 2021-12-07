@@ -2,9 +2,10 @@
 
 namespace Main;
 
+use Oop\InvoiceBuilder;
 use Oop\InvoiceCliRenderer;
 use Oop\InvoiceHtmlRenderer;
-use Oop\InvoiceBuilder;
+
 use Oop\InvoiceManager;
 use Oop\InvoiceValidatorFactory;
 use Oop\Price;
