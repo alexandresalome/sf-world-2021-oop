@@ -2,6 +2,8 @@
 
 namespace Main;
 
+use Oop\InvoiceCliRenderer;
+use Oop\InvoiceHtmlRenderer;
 use Symfony\Component\ErrorHandler\ErrorHandler;
 
 require_once __DIR__.'/vendor/autoload.php';
@@ -10,6 +12,8 @@ ErrorHandler::register();
 
 // Configuration
 $discounted = ($argv[1] ?? '') === 'discount';
+
+// Either be filled by the user or fetched from a service
 $id = 123;
 $items = [
     [3, 'Apples', 39],
@@ -17,27 +21,19 @@ $items = [
     [1, 'Bag', 100],
 ];
 
-echo "INVOICE #$id\n\n";
-
-$total = 0;
-
-echo sprintf("%-20s %-8s %-8s\n", 'Description', 'Qty', 'Total');
-echo sprintf("%-20s %-8s %-8s\n", '-----------', '---', '-----');
-
-foreach ($items as [$qty, $desc, $price]) {
+// Discount logic f($items) --> $items
+foreach ($items as $key => [$qty, $desc, $price]) {
     if ($desc === 'Bananas' && $discounted) {
-        $price /= 2;
-        $desc .= ' (-50%)';
+        $items[$key][2] /= 2;
+        $items[$key][1] .= ' (-50%)';
     }
 
     if ($desc === 'Apples' && $discounted) {
-        $price = (int) $price * .9;
-        $desc .= ' (-10%)';
+        $items[$key][2] = (int) $items[$key][2] * .9;
+        $items[$key][1] .= ' (-10%)';
     }
-
-    echo sprintf("%-20s %-8s %-8s\n", $desc, $qty, $price);
-    $total += $qty * $price;
 }
 
-echo "\n";
-echo sprintf("TOTAL: %s\n", $total);
+$cli = PHP_SAPI === 'cli';
+$renderer = $cli ? new InvoiceCliRenderer() : new InvoiceHtmlRenderer();
+$renderer->render($id, $items, $discounted);
