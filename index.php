@@ -2,11 +2,10 @@
 
 namespace Main;
 
+use Money\Money;
 use Oop\InvoiceBuilder;
 use Oop\InvoiceCliRenderer;
 use Oop\InvoiceHtmlRenderer;
-
-use Oop\InvoiceManager;
 use Oop\InvoiceValidatorFactory;
 use Oop\Price;
 use Symfony\Component\ErrorHandler\Debug;
@@ -19,9 +18,15 @@ Debug::enable();
 $discounted = ($argv[1] ?? '') === 'discount';
 //$invoice = InvoiceManager::getInstance()->getFruitInvoice($discounted);
 
+// old
+$applePrice = Price::euro(39);
+
+// new
+// $applePrice = Money::EUR(39);
+
 $invoice = (new InvoiceBuilder())
     ->setId(123)
-    ->addLine(300, 'Apples', Price::euro(39))
+    ->addLine(300, 'Apples', $applePrice)
     ->removeLine('Apples')
     ->addLine(1, 'Bananas', Price::euro(60))
     ->increment('Bananas', 1)

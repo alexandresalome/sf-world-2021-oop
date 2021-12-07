@@ -8,5 +8,8 @@
     "require-dev": {
         "symfony/error-handler": "^5.0|^6.0",
         "symfony/var-dumper": "^5.0|^6.0"
+    },
+    "require": {
+        "moneyphp/money": "^4.0"
     }
 }
