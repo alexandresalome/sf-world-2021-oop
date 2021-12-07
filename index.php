@@ -6,9 +6,10 @@ use Oop\Currency;
 use Oop\Invoice;
 use Oop\InvoiceCliRenderer;
 use Oop\InvoiceHtmlRenderer;
+use Oop\InvoiceLine;
+use Oop\InvoiceLineCollection;
 use Oop\Price;
 use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\ErrorHandler\ErrorHandler;
 
 require_once __DIR__.'/vendor/autoload.php';
 
@@ -38,7 +39,11 @@ foreach ($lines as $key => [$qty, $desc, $price]) {
     }
 }
 
-$invoice = new Invoice($id, $lines);
+$lines = array_map(function ($line) {
+    return new InvoiceLine($line[0], $line[1], $line[2]);
+}, $lines);
+
+$invoice = new Invoice($id, new InvoiceLineCollection($lines));
 
 $cli = PHP_SAPI === 'cli';
 /** @var \Oop\InvoiceRendererInterface $renderer */

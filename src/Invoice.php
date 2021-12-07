@@ -5,9 +5,9 @@ namespace Oop;
 class Invoice
 {
     private string $id;
-    private array $lines;
+    private InvoiceLineCollection $lines;
 
-    public function __construct(string $id, array $lines)
+    public function __construct(string $id, InvoiceLineCollection $lines)
     {
         $this->id = $id;
         $this->lines = $lines;
@@ -18,8 +18,16 @@ class Invoice
         return $this->id;
     }
 
+    /**
+     * @return InvoiceLine[]
+     */
     public function getLines(): array
     {
-        return $this->lines;
+        return $this->lines->getLines();
+    }
+
+    public function getTotal(): Price
+    {
+        return $this->lines->getTotal();
     }
 }
