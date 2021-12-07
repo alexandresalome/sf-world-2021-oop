@@ -2,6 +2,7 @@
 
 namespace Main;
 
+use Oop\Invoice;
 use Oop\InvoiceCliRenderer;
 use Oop\InvoiceHtmlRenderer;
 use Symfony\Component\ErrorHandler\ErrorHandler;
@@ -15,25 +16,28 @@ $discounted = ($argv[1] ?? '') === 'discount';
 
 // Either be filled by the user or fetched from a service
 $id = 123;
-$items = [
+$lines = [
     [3, 'Apples', 39],
     [2, 'Bananas', 60],
     [1, 'Bag', 100],
 ];
 
 // Discount logic f($items) --> $items
-foreach ($items as $key => [$qty, $desc, $price]) {
+foreach ($lines as $key => [$qty, $desc, $price]) {
     if ($desc === 'Bananas' && $discounted) {
-        $items[$key][2] /= 2;
-        $items[$key][1] .= ' (-50%)';
+        $lines[$key][2] /= 2;
+        $lines[$key][1] .= ' (-50%)';
     }
 
     if ($desc === 'Apples' && $discounted) {
-        $items[$key][2] = (int) $items[$key][2] * .9;
-        $items[$key][1] .= ' (-10%)';
+        $lines[$key][2] = (int) $lines[$key][2] * .9;
+        $lines[$key][1] .= ' (-10%)';
     }
 }
 
+$invoice = new Invoice($id, $lines);
+
 $cli = PHP_SAPI === 'cli';
+/** @var \Oop\InvoiceRendererInterface $renderer */
 $renderer = $cli ? new InvoiceCliRenderer() : new InvoiceHtmlRenderer();
-$renderer->render($id, $items, $discounted);
+$renderer->render($invoice);

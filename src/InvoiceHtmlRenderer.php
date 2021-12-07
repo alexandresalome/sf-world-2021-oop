@@ -2,11 +2,11 @@
 
 namespace Oop;
 
-class InvoiceHtmlRenderer
+class InvoiceHtmlRenderer implements InvoiceRendererInterface
 {
-    public function render(string $id, array $items): void
+    public function render(Invoice $invoice): void
     {
-        echo "<h1>INVOICE #$id</h1>";
+        echo sprintf("<h1>INVOICE #%s</h1>", $invoice->getId());
         echo '<pre>';
 
         $total = 0;
@@ -14,7 +14,7 @@ class InvoiceHtmlRenderer
         echo sprintf("%-20s %-8s %-8s\n", 'Description', 'Qty', 'Total');
         echo sprintf("%-20s %-8s %-8s\n", '-----------', '---', '-----');
 
-        foreach ($items as [$qty, $desc, $price]) {
+        foreach ($invoice->getLines() as [$qty, $desc, $price]) {
             echo sprintf("%-20s %-8s %-8s\n", $desc, $qty, $price);
             $total += $qty * $price;
         }
