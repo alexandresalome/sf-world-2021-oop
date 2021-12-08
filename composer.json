@@ -16,6 +16,7 @@
     },
     "require": {
         "moneyphp/money": "^4.0",
-        "symfony/phpunit-bridge": "^6.0"
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/event-dispatcher": "^6.0"
     }
 }

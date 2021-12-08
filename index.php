@@ -6,6 +6,8 @@ namespace Main;
 
 use Money\Money;
 use Oop\Builder\InvoiceBuilder;
+use Oop\Event\InvoicePaidEvent;
+use Oop\EventSubscriber\ConsoleLogSubscriber;
 use Oop\Invoice;
 use Oop\Price\Price;
 use Oop\Renderer\InvoiceCliRenderer;
@@ -14,6 +16,7 @@ use Oop\Renderer\InvoiceRendererInterface;
 use Oop\Validator\InvoiceValidatorFactory;
 use Oop\Price\MoneyAdapter;
 use Symfony\Component\ErrorHandler\Debug;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 require_once __DIR__.'/vendor/autoload.php';
 
@@ -40,6 +43,14 @@ $invoice = (new InvoiceBuilder())
 
 $invoice->publish();
 $invoice->pay();
+
+$eventDispatcher = new EventDispatcher();
+$eventDispatcher->addSubscriber(new ConsoleLogSubscriber());
+$eventDispatcher->addListener(InvoicePaidEvent::class, function ($invoice) {
+    // do nothing :)
+});
+$eventDispatcher->dispatch(new InvoicePaidEvent($invoice));
+
 
 // filter the invoice lines
 // $invoice = new Invoice(
