@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Oop;
 
+use Exception;
 use Oop\Price\Price;
+use Traversable;
 
-class InvoiceLineCollection
+class InvoiceLineCollection implements \IteratorAggregate
 {
     /**
      * @var InvoiceLine[]
@@ -21,14 +23,6 @@ class InvoiceLineCollection
         $this->lines = $lines;
     }
 
-    /**
-     * @return InvoiceLine[]
-     */
-    public function getLines(): array
-    {
-        return $this->lines;
-    }
-
     public function getTotal(): Price
     {
         $total = Price::euro(0);
@@ -37,5 +31,10 @@ class InvoiceLineCollection
         }
 
         return $total;
+    }
+
+    public function getIterator(): \ArrayIterator
+    {
+        return new \ArrayIterator($this->lines);
     }
 }

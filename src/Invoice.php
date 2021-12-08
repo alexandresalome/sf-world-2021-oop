@@ -23,11 +23,11 @@ class Invoice
     }
 
     /**
-     * @return InvoiceLine[]
+     * @return InvoiceLineCollection
      */
-    public function getLines(): array
+    public function getLines(): InvoiceLineCollection
     {
-        return $this->lines->getLines();
+        return $this->lines;
     }
 
     public function getTotal(): Price
