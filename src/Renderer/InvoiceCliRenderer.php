@@ -5,28 +5,34 @@ declare(strict_types=1);
 namespace Oop\Renderer;
 
 use Oop\Invoice;
+use Oop\InvoiceLine;
 
-class InvoiceCliRenderer implements InvoiceRendererInterface
+class InvoiceCliRenderer extends AbstractRenderer
 {
-    public function render(Invoice $invoice): void
+    protected function renderHeading(Invoice $invoice): void
     {
-        echo sprintf("## INVOICE #%s\n\n", $invoice->getId());
+        echo sprintf("## INVOICE #%s\n", $invoice->getId());
+    }
 
-        echo sprintf("%-20s %-8s %-8s\n", 'Description', 'Qty', 'Unit price');
-        echo sprintf("%-20s %-8s %-8s\n", '-----------', '---', '----------');
+    protected function renderLine(InvoiceLine $line): void
+    {
+        echo sprintf(
+            "%-20s %-8s %-8s\n",
+            $line->getDescription(),
+            $line->getQuantity(),
+            $line->getUnitPrice()->toString()
+        );
+    }
 
-        foreach ($invoice->getLines() as $line) {
-            echo sprintf(
-                "%-20s %-8s %-8s\n",
-                $line->getDescription(),
-                $line->getQuantity(),
-                $line->getUnitPrice()->toString()
-            );
-        }
-
-        echo "\n";
+    protected function renderFooter(Invoice $invoice): void
+    {
         echo sprintf("Delivery fees: %s\n", $invoice->getDeliveryFees()->toString());
         echo "\n";
         echo sprintf("TOTAL: %s\n", $invoice->getTotal()->toString());
+    }
+
+    protected function renderSeparator(): void
+    {
+        echo "\n---------------------------------------\n\n";
     }
 }
