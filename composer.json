@@ -5,11 +5,17 @@
             "Oop\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Oop\\Tests\\": "tests/"
+        }
+    },
     "require-dev": {
         "symfony/error-handler": "^5.0|^6.0",
         "symfony/var-dumper": "^5.0|^6.0"
     },
     "require": {
-        "moneyphp/money": "^4.0"
+        "moneyphp/money": "^4.0",
+        "symfony/phpunit-bridge": "^6.0"
     }
 }

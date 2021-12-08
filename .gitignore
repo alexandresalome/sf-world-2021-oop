@@ -1,2 +1,5 @@
+/bin/.phpunit
+/bin/tools/
 /vendor/
+.phpunit.result.cache
 /composer.lock

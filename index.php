@@ -8,6 +8,7 @@ use Money\Money;
 use Oop\Builder\InvoiceBuilder;
 use Oop\Renderer\InvoiceCliRenderer;
 use Oop\Renderer\InvoiceHtmlRenderer;
+use Oop\Renderer\InvoiceRendererInterface;
 use Oop\Validator\InvoiceValidatorFactory;
 use Oop\Price\MoneyAdapter;
 use Symfony\Component\ErrorHandler\Debug;
@@ -18,7 +19,6 @@ Debug::enable();
 
 // Configuration
 $discounted = ($argv[1] ?? '') === 'discount';
-//$invoice = InvoiceManager::getInstance()->getFruitInvoice($discounted);
 
 $invoice = (new InvoiceBuilder())
     ->setId(123)
@@ -31,13 +31,12 @@ $invoice = (new InvoiceBuilder())
     ->getInvoice()
 ;
 
-
 (new InvoiceValidatorFactory())
     ->getInvoiceValidator($invoice)
     ->validate($invoice)
 ;
 
 $cli = PHP_SAPI === 'cli';
-/** @var \Oop\InvoiceRendererInterface $renderer */
+/** @var InvoiceRendererInterface $renderer */
 $renderer = $cli ? new InvoiceCliRenderer() : new InvoiceHtmlRenderer();
 $renderer->render($invoice);

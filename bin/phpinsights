@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+cd "`dirname "$0"`"
+
+if [ ! -d tools/phpinsights ]; then
+    rm -rf tools/phpinsights.tmp
+    mkdir --parents tools/phpinsights.tmp
+    composer require --working-dir=tools/phpinsights.tmp nunomaduro/phpinsights
+    mv tools/phpinsights{.tmp,}
+fi
+
+cd ..
+
+exec bin/tools/phpinsights/vendor/bin/phpinsights $*
