@@ -15,6 +15,8 @@ class InvoiceValidatorFactory
     public function getInvoiceValidator(Invoice $invoice): InvoiceValidatorInterface
     {
         return new ChainValidator([
+            new ConditionalDayValidator(new MinimumAmountValidator(Price::euro(10000000)), 'Wednesday'),
+            new NegateValidator(new SpecialDayValidator('Wednesday', Price::euro(10000000)), 'No order > 100 on tuesday.'),
             new SpecialDayValidator('Tuesday', Price::euro(10000)),
             new SpecialDayValidator('Monday', Price::euro(1000)),
             new QuantityValidator(),
