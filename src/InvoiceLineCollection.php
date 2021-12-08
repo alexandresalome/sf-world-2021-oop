@@ -33,8 +33,27 @@ class InvoiceLineCollection implements \IteratorAggregate
         return $total;
     }
 
+    public function unitPriceLowerThan(Price $price): self
+    {
+        return $this->filterLines(function (InvoiceLine $line) use ($price) {
+            return $line->getUnitPrice()->isLowerThan($price);
+        });
+    }
+
+    public function noBag(): self
+    {
+        return $this->filterLines(function (InvoiceLine $line) {
+            return $line->getDescription() !== 'Bag';
+        });
+    }
+
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->lines);
+    }
+
+    private function filterLines(\Closure $callable): self
+    {
+        return new InvoiceLineCollection(array_filter($this->lines, $callable));
     }
 }

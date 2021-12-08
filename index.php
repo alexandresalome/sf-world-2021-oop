@@ -6,6 +6,8 @@ namespace Main;
 
 use Money\Money;
 use Oop\Builder\InvoiceBuilder;
+use Oop\Invoice;
+use Oop\Price\Price;
 use Oop\Renderer\InvoiceCliRenderer;
 use Oop\Renderer\InvoiceHtmlRenderer;
 use Oop\Renderer\InvoiceRendererInterface;
@@ -24,9 +26,9 @@ $invoice = (new InvoiceBuilder())
     ->setId(123)
     ->addLine(300, 'Apples', new MoneyAdapter(Money::EUR(39)))
     ->removeLine('Apples')
-    ->addLine(1, 'Bananas', new MoneyAdapter(Money::EUR(60)))
+    ->addLine(1, 'Bananas', new MoneyAdapter(Money::EUR(71)))
     ->increment('Bananas', 1)
-    ->addLine(1, 'Bag', new MoneyAdapter(Money::EUR(100)))
+    ->addLine(1, 'Bag', new MoneyAdapter(Money::EUR(30)))
     ->addLine(300, 'Apples', new MoneyAdapter(Money::EUR(39)))
     ->getInvoice()
 ;
@@ -35,6 +37,14 @@ $invoice = (new InvoiceBuilder())
     ->getInvoiceValidator($invoice)
     ->validate($invoice)
 ;
+
+// filter the invoice lines
+// $invoice = new Invoice(
+//     124,
+//     $invoice->getLines()
+//         ->unitPriceLowerThan(Price::euro(70))
+//         ->noBag()
+// );
 
 $cli = PHP_SAPI === 'cli';
 /** @var InvoiceRendererInterface $renderer */

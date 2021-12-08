@@ -18,13 +18,7 @@ class Price
 
     public function add(Price $price): Price
     {
-        if (!$price->currency->equals($this->currency)) {
-            throw new \LogicException(sprintf(
-                'Cannot add "%s" and "%s".',
-                $price->currency->toString(),
-                $this->currency->toString()
-            ));
-        }
+        $this->ensureSameCurrency($price);
 
         return new Price(
             $price->cents + $this->cents,
@@ -59,7 +53,21 @@ class Price
         return $this->cents > 0;
     }
 
+    public function isLowerThan(Price $price)
+    {
+        $this->ensureSameCurrency($price);
+
+        return $this->cents < $price->cents;
+    }
+
     public function isGreaterThan(Price $price): bool
+    {
+        $this->ensureSameCurrency($price);
+
+        return $this->cents > $price->cents;
+    }
+
+    private function ensureSameCurrency(Price $price): void
     {
         if (!$price->currency->equals($this->currency)) {
             throw new \RuntimeException(sprintf(
@@ -68,7 +76,5 @@ class Price
                 $this->currency->toString(),
             ));
         }
-
-        return $this->cents > $price->cents;
     }
 }
