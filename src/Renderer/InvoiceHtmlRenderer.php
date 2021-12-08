@@ -9,6 +9,11 @@ use Oop\InvoiceLine;
 
 class InvoiceHtmlRenderer extends AbstractRenderer
 {
+    public function getName(): string
+    {
+        return 'html';
+    }
+
     protected function renderHeading(Invoice $invoice): void
     {
         echo sprintf("<h1>INVOICE #%s</h1>", $invoice->getId());

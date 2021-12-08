@@ -9,4 +9,5 @@ use Oop\Invoice;
 interface InvoiceRendererInterface
 {
     public function render(Invoice $invoice): void;
+    public function getName(): string;
 }

@@ -14,6 +14,7 @@ use Oop\Price\Price;
 use Oop\Renderer\InvoiceCliRenderer;
 use Oop\Renderer\InvoiceHtmlRenderer;
 use Oop\Renderer\InvoiceRendererInterface;
+use Oop\Renderer\RendererHandler;
 use Oop\Validator\InvoiceValidatorFactory;
 use Oop\Price\MoneyAdapter;
 use Symfony\Component\ErrorHandler\Debug;
@@ -66,5 +67,5 @@ $invoice->onPaid(new ConsoleLogOnOrderPaid());
 
 $cli = PHP_SAPI === 'cli';
 /** @var InvoiceRendererInterface $renderer */
-$renderer = $cli ? new InvoiceCliRenderer() : new InvoiceHtmlRenderer();
-$renderer->render($invoice);
+$handler = new RendererHandler([new InvoiceCliRenderer(), new InvoiceHtmlRenderer()]);
+$handler->render($invoice, $cli ? 'cli' : 'html');
