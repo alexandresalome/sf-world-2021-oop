@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Oop\Validator;
 
 use Oop\Invoice;
@@ -9,22 +7,22 @@ use Oop\Invoice;
 class NegateValidator implements InvoiceValidatorInterface
 {
     private InvoiceValidatorInterface $validator;
-    private string $message;
+    private string $errorMessage;
 
-    public function __construct(InvoiceValidatorInterface $validator, string $message)
+    public function __construct(InvoiceValidatorInterface $validator, string $errorMessage)
     {
         $this->validator = $validator;
-        $this->message = $message;
+        $this->errorMessage = $errorMessage;
     }
 
     public function validate(Invoice $invoice): void
     {
         try {
             $this->validator->validate($invoice);
-        } catch (\RuntimeException $exception) {
+        } catch (\Throwable) {
             return;
         }
 
-        throw new \RuntimeException($this->message);
+        throw new \LogicException($this->errorMessage);
     }
 }
