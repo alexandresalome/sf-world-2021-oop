@@ -6,11 +6,7 @@ namespace Main;
 
 use Money\Money;
 use Oop\Builder\InvoiceBuilder;
-use Oop\Event\InvoicePaidEvent;
 use Oop\EventSubscriber\ConsoleLogOnOrderPaid;
-use Oop\EventSubscriber\ConsoleLogSubscriber;
-use Oop\Invoice;
-use Oop\Price\Price;
 use Oop\Renderer\InvoiceCliRenderer;
 use Oop\Renderer\InvoiceHtmlRenderer;
 use Oop\Renderer\InvoiceRendererInterface;
@@ -18,7 +14,6 @@ use Oop\Renderer\RendererHandler;
 use Oop\Validator\InvoiceValidatorFactory;
 use Oop\Price\MoneyAdapter;
 use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 require_once __DIR__.'/vendor/autoload.php';
 
