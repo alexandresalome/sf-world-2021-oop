@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Main;
 
 use Money\Money;
-use Oop\InvoiceBuilder;
-use Oop\InvoiceCliRenderer;
-use Oop\InvoiceHtmlRenderer;
-use Oop\InvoiceValidatorFactory;
-use Oop\MoneyAdapter;
+use Oop\Builder\InvoiceBuilder;
+use Oop\Renderer\InvoiceCliRenderer;
+use Oop\Renderer\InvoiceHtmlRenderer;
+use Oop\Validator\InvoiceValidatorFactory;
+use Oop\Price\MoneyAdapter;
 use Symfony\Component\ErrorHandler\Debug;
 
 require_once __DIR__.'/vendor/autoload.php';

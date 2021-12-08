@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Oop;
 
+use Oop\Price\Price;
+
 class Invoice
 {
     private int $id;

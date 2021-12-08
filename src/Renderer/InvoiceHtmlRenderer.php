@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Oop;
+namespace Oop\Renderer;
+
+use Oop\Invoice;
 
 class InvoiceHtmlRenderer implements InvoiceRendererInterface
 {

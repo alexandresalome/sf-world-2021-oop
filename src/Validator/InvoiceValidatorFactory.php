@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Oop;
+namespace Oop\Validator;
+
+use Oop\Invoice;
+use Oop\Price\Price;
 
 class InvoiceValidatorFactory
 {

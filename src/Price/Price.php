@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oop;
+namespace Oop\Price;
 
 // Value Object
 class Price

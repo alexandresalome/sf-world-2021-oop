@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oop;
+namespace Oop\Price;
 
 class Currency
 {

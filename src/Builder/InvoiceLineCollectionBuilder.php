@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Oop;
+namespace Oop\Builder;
+
+use Oop\InvoiceLineCollection;
+use Oop\Price\Price;
 
 class InvoiceLineCollectionBuilder
 {
