@@ -10,11 +10,14 @@ class Invoice
 {
     private int $id;
     private InvoiceLineCollection $lines;
+    private InvoiceStateInterface $state;
 
     public function __construct(int $id, InvoiceLineCollection $lines)
     {
         $this->id = $id;
         $this->lines = $lines;
+
+        $this->state = new DraftState();
     }
 
     public function getId(): int
@@ -38,5 +41,20 @@ class Invoice
     public function getDeliveryFees(): Price
     {
         return Price::euro(700);
+    }
+
+    public function publish(): void
+    {
+        $this->state = $this->state->publish();
+    }
+
+    public function pay(): void
+    {
+        $this->state = $this->state->pay();
+    }
+
+    public function cancel(): void
+    {
+        $this->state = $this->state->cancel();
     }
 }

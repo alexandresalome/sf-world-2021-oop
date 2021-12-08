@@ -38,6 +38,9 @@ $invoice = (new InvoiceBuilder())
     ->validate($invoice)
 ;
 
+$invoice->publish();
+$invoice->pay();
+
 // filter the invoice lines
 // $invoice = new Invoice(
 //     124,
