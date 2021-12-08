@@ -7,6 +7,7 @@ namespace Main;
 use Money\Money;
 use Oop\Builder\InvoiceBuilder;
 use Oop\Event\InvoicePaidEvent;
+use Oop\EventSubscriber\ConsoleLogOnOrderPaid;
 use Oop\EventSubscriber\ConsoleLogSubscriber;
 use Oop\Invoice;
 use Oop\Price\Price;
@@ -44,12 +45,15 @@ $invoice = (new InvoiceBuilder())
 $invoice->publish();
 $invoice->pay();
 
-$eventDispatcher = new EventDispatcher();
-$eventDispatcher->addSubscriber(new ConsoleLogSubscriber());
-$eventDispatcher->addListener(InvoicePaidEvent::class, function ($invoice) {
-    // do nothing :)
-});
-$eventDispatcher->dispatch(new InvoicePaidEvent($invoice));
+// $eventDispatcher = new EventDispatcher();
+// $eventDispatcher->addSubscriber(new ConsoleLogSubscriber());
+// $eventDispatcher->addListener(InvoicePaidEvent::class, function ($invoice) {
+//     // do nothing :)
+// });
+// $eventDispatcher->dispatch(new InvoicePaidEvent($invoice));
+
+
+$invoice->onPaid(new ConsoleLogOnOrderPaid());
 
 
 // filter the invoice lines
