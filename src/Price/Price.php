@@ -53,7 +53,7 @@ class Price
         return $this->cents > 0;
     }
 
-    public function isLowerThan(Price $price)
+    public function isLowerThan(Price $price): bool
     {
         $this->ensureSameCurrency($price);
 

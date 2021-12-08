@@ -14,7 +14,7 @@ class ConsoleLogSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onInvoicePaid(InvoicePaidEvent $event): void
+    public function onInvoicePaid(): void
     {
         echo "We confirm that the invoice was paid. Moneeeyyyyy $$$$\n";
     }
